@@ -33,7 +33,7 @@ Tested on macOS 10.15. Building on Windows is WIP.
 ## macOS
 
 1. Install `Xcode 10`. **Do not use Xcode 11 since Chromium does not support Xcode 11.**
-2. Clone this project: `git clone https://github.com/hellotanuky/clear-browser
+2. Clone this project: `git clone https://github.com/hellotanuky/clear-browser`
 3. Open a terminal and cd to project folder: `cd clear-browser`
 4. Build Chromium with patches: `./scripts/build.py build`
 5. Wait patiently.
