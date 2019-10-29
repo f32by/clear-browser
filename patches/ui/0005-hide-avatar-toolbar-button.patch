@@ -1,0 +1,11 @@
+--- a/chrome/browser/ui/views/toolbar/toolbar_view.cc
++++ b/chrome/browser/ui/views/toolbar/toolbar_view.cc
+@@ -265,7 +265,7 @@ void ToolbarView::Init() {
+ 
+   std::unique_ptr<ToolbarAccountIconContainerView>
+       toolbar_account_icon_container;
+-  bool show_avatar_toolbar_button = true;
++  bool show_avatar_toolbar_button = false;
+   if (base::FeatureList::IsEnabled(
+           autofill::features::kAutofillEnableToolbarStatusChip)) {
+     // The avatar button is contained inside the page-action container and

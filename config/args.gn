@@ -1,0 +1,37 @@
+is_component_build = false
+use_jumbo_build = true
+
+is_debug = false
+symbol_level = 0
+blink_symbol_level = 0
+safe_browsing_mode = 0
+enable_iterator_debugging = false
+treat_warnings_as_errors = true
+fieldtrial_testing_like_official_build = true
+
+exclude_unwind_tables = true
+
+is_clang = true
+clang_use_chrome_plugins = false
+closure_compile = false
+enable_hangout_services_extension = false
+enable_platform_hevc = true
+enable_mdns = false
+enable_mse_mpeg2ts_stream_parser = true
+enable_nacl = false
+enable_nacl_nonsfi = false
+enable_reading_list = false
+enable_remoting = false
+enable_reporting = false
+enable_service_discovery = false
+enable_widevine = true
+optimize_webui = false
+use_official_google_api_keys = false
+use_unofficial_version_number = false
+enable_platform_ac3_eac3_audio = true
+enable_swiftshader = true
+ffmpeg_branding = "Chrome"
+is_official_build = true
+proprietary_codecs = true
+use_gnome_keyring = false
+use_sysroot = false

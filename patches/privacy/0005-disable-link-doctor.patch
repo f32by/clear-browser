@@ -1,0 +1,63 @@
+--- a/chrome/browser/captive_portal/captive_portal_service.cc
++++ b/chrome/browser/captive_portal/captive_portal_service.cc
+@@ -387,8 +387,7 @@ void CaptivePortalService::ResetBackoffE
+ void CaptivePortalService::UpdateEnabledState() {
+   DCHECK_CURRENTLY_ON(content::BrowserThread::UI);
+   bool enabled_before = enabled_;
+-  enabled_ = testing_state_ != DISABLED_FOR_TESTING &&
+-             resolve_errors_with_web_service_.GetValue();
++  enabled_ = false;
+ 
+   if (testing_state_ != SKIP_OS_CHECK_FOR_TESTING &&
+       testing_state_ != IGNORE_REQUESTS_FOR_TESTING &&
+--- a/chrome/browser/net/net_error_tab_helper.cc
++++ b/chrome/browser/net/net_error_tab_helper.cc
+@@ -151,15 +151,7 @@ NetErrorTabHelper::NetErrorTabHelper(Web
+ }
+ 
+ void NetErrorTabHelper::OnMainFrameDnsError() {
+-  if (ProbesAllowed()) {
+-    // Don't start more than one probe at a time.
+-    if (dns_probe_status_ != error_page::DNS_PROBE_STARTED) {
+-      StartDnsProbe();
+-      dns_probe_status_ = error_page::DNS_PROBE_STARTED;
+-    }
+-  } else {
+     dns_probe_status_ = error_page::DNS_PROBE_NOT_RUN;
+-  }
+ }
+ 
+ void NetErrorTabHelper::StartDnsProbe() {
+--- a/chrome/browser/prefs/browser_prefs.cc
++++ b/chrome/browser/prefs/browser_prefs.cc
+@@ -792,7 +792,6 @@ void RegisterProfilePrefs(user_prefs::Pr
+   MediaEngagementService::RegisterProfilePrefs(registry);
+   MediaStorageIdSalt::RegisterProfilePrefs(registry);
+   MediaStreamDevicesController::RegisterProfilePrefs(registry);
+-  NavigationCorrectionTabObserver::RegisterProfilePrefs(registry);
+   NotifierStateTracker::RegisterProfilePrefs(registry);
+   ntp_snippets::ContentSuggestionsService::RegisterProfilePrefs(registry);
+   ntp_snippets::RemoteSuggestionsProviderImpl::RegisterProfilePrefs(registry);
+--- a/chrome/browser/ui/tab_helpers.cc
++++ b/chrome/browser/ui/tab_helpers.cc
+@@ -230,7 +230,6 @@ void TabHelpers::AttachTabHelpers(WebCon
+       web_contents);
+   MixedContentSettingsTabHelper::CreateForWebContents(web_contents);
+   NativeFileSystemPermissionRequestManager::CreateForWebContents(web_contents);
+-  NavigationCorrectionTabObserver::CreateForWebContents(web_contents);
+   NavigationMetricsRecorder::CreateForWebContents(web_contents);
+   OptimizationGuideWebContentsObserver::CreateForWebContents(web_contents);
+   OutOfMemoryReporter::CreateForWebContents(web_contents);
+--- a/chrome/browser/resources/settings/privacy_page/personalization_options.html
++++ b/chrome/browser/resources/settings/privacy_page/personalization_options.html
+@@ -30,10 +30,6 @@
+         border-top: none;
+       }
+     </style>
+-    <settings-toggle-button pref="{{prefs.alternate_error_pages.enabled}}"
+-        label="$i18n{linkDoctorPref}"
+-        sub-label="$i18n{linkDoctorPrefDesc}">
+-    </settings-toggle-button>
+ <if expr="_google_chrome">
+     <settings-toggle-button id="spellCheckControl"
+         pref="{{prefs.spellcheck.use_spelling_service}}"

@@ -1,0 +1,18 @@
+diff --git a/build/config/compiler/BUILD.gn b/build/config/compiler/BUILD.gn
+index 93ad68a613b3..f4db211811cc 100644
+--- a/build/config/compiler/BUILD.gn
++++ b/build/config/compiler/BUILD.gn
+@@ -1249,7 +1249,12 @@ config("runtime_library") {
+ # subconfig of both chromium_code and no_chromium_code.  This way these
+ # flags are guaranteed to appear on the compile command line after -Wall.
+ config("default_warnings") {
+-  cflags = []
++  cflags = [
++      "-Wno-unused-variable",
++      "-Wno-unused-const-variable",
++      "-Wno-unused-private-field",
++      "-Wno-unused-function"
++    ]
+   cflags_c = []
+   cflags_cc = []
+   ldflags = []

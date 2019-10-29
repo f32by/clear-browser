@@ -1,0 +1,66 @@
+--- a/chrome/browser/ui/cocoa/profiles/profile_menu_controller.mm
++++ b/chrome/browser/ui/cocoa/profiles/profile_menu_controller.mm
+@@ -21,6 +21,7 @@
+ #include "chrome/browser/ui/browser_list.h"
+ #include "chrome/browser/ui/browser_list_observer.h"
+ #include "chrome/browser/ui/cocoa/last_active_browser_cocoa.h"
++#include "chrome/browser/ui/user_manager.h"
+ #include "chrome/common/pref_names.h"
+ #include "chrome/grit/generated_resources.h"
+ #include "components/prefs/pref_service.h"
+@@ -43,6 +44,7 @@ enum ValidateMenuItemSelector {
+ 
+ // Check Add Person pref.
+ bool IsAddPersonEnabled() {
++  return false;
+   PrefService* service = g_browser_process->local_state();
+   DCHECK(service);
+   return service->GetBoolean(prefs::kBrowserAddPersonEnabled);
+@@ -127,6 +129,22 @@ class Observer : public BrowserListObser
+                                         ProfileMetrics::ADD_NEW_USER_MENU);
+ }
+ 
++- (IBAction)openGuestWindow:(id)sender {
++  profiles::SwitchToGuestProfile(ProfileManager::CreateCallback());
++}
++
++- (IBAction)manageProfile:(id)sender {
++  UserManager::Show(base::FilePath(),
++    profiles::USER_MANAGER_SELECT_PROFILE_NO_ACTION);
++}
++
++- (IBAction)closeAllYourWindows:(id)sender {
++  Profile* profile = g_browser_process->profile_manager()->GetProfileByPath(
++      avatarMenu_->GetItemAt(
++        avatarMenu_->GetActiveProfileIndex()).profile_path);
++  profiles::CloseProfileWindows(profile);
++}
++
+ - (BOOL)insertItemsIntoMenu:(NSMenu*)menu
+                    atOffset:(NSInteger)offset
+                    fromDock:(BOOL)dock {
+@@ -260,6 +278,24 @@ class Observer : public BrowserListObser
+     [[self menu] addItem:item];
+   }
+ 
++  // add guest menu
++  item = [self createItemWithTitle:l10n_util::GetNSStringWithFixup(
++                                       IDS_PROFILES_OPEN_GUEST_PROFILE_BUTTON)
++                              action:@selector(openGuestWindow:)];
++  [[self menu] addItem:item];
++
++  // add manage people item
++  item = [self createItemWithTitle:l10n_util::GetNSStringWithFixup(
++                                       IDS_PROFILES_MANAGE_USERS_BUTTON)
++                              action:@selector(manageProfile:)];
++  [[self menu] addItem:item];
++
++  // add close all your windows item
++  item = [self createItemWithTitle:l10n_util::GetNSStringWithFixup(
++                                       IDS_PROFILES_CLOSE_ALL_WINDOWS_BUTTON)
++                              action:@selector(closeAllYourWindows:)];
++  [[self menu] addItem:item];
++
+   [self rebuildMenu];
+ }
+ 

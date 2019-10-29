@@ -1,0 +1,27 @@
+--- a/components/unified_consent/unified_consent_service.cc
++++ b/components/unified_consent/unified_consent_service.cc
+@@ -75,7 +75,7 @@ void UnifiedConsentService::SetUrlKeyedA
+     SetMigrationState(MigrationState::kCompleted);
+ 
+   pref_service_->SetBoolean(prefs::kUrlKeyedAnonymizedDataCollectionEnabled,
+-                            enabled);
++                            false);
+ }
+ 
+ void UnifiedConsentService::Shutdown() {
+--- a/chrome/browser/resources/settings/privacy_page/personalization_options.html
++++ b/chrome/browser/resources/settings/privacy_page/personalization_options.html
+@@ -39,13 +39,6 @@
+         label="$i18n{linkDoctorPref}"
+         sub-label="$i18n{linkDoctorPrefDesc}">
+     </settings-toggle-button>
+-    <template is="dom-if" if="[[unifiedConsentEnabled]]">
+-      <settings-toggle-button
+-          pref="{{prefs.url_keyed_anonymized_data_collection.enabled}}"
+-          label="$i18n{urlKeyedAnonymizedDataCollection}"
+-          sub-label="$i18n{urlKeyedAnonymizedDataCollectionDesc}">
+-      </settings-toggle-button>
+-    </template>
+ <if expr="_google_chrome">
+     <settings-toggle-button id="spellCheckControl"
+         pref="{{prefs.spellcheck.use_spelling_service}}"

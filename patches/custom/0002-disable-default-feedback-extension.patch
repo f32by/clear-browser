@@ -1,0 +1,16 @@
+--- a/chrome/browser/extensions/component_loader.cc
++++ b/chrome/browser/extensions/component_loader.cc
+@@ -523,13 +523,6 @@ void ComponentLoader::AddDefaultComponen
+     AddHangoutServicesExtension();
+ #endif  // BUILDFLAG(ENABLE_HANGOUT_SERVICES_EXTENSION)
+ 
+-    bool install_feedback = enable_background_extensions_during_testing;
+-#if BUILDFLAG(GOOGLE_CHROME_BRANDING)
+-    install_feedback = true;
+-#endif  // BUILDFLAG(GOOGLE_CHROME_BRANDING)
+-    if (install_feedback)
+-      Add(IDR_FEEDBACK_MANIFEST, base::FilePath(FILE_PATH_LITERAL("feedback")));
+-
+ #if defined(OS_CHROMEOS)
+     AddChromeCameraApp();
+     AddVideoPlayerExtension();

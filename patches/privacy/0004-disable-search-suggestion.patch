@@ -1,0 +1,95 @@
+--- a/chrome/browser/autocomplete/chrome_autocomplete_provider_client.cc
++++ b/chrome/browser/autocomplete/chrome_autocomplete_provider_client.cc
+@@ -275,7 +275,7 @@ bool ChromeAutocompleteProviderClient::I
+ }
+ 
+ bool ChromeAutocompleteProviderClient::SearchSuggestEnabled() const {
+-  return profile_->GetPrefs()->GetBoolean(prefs::kSearchSuggestEnabled);
++  return false;
+ }
+ 
+ bool ChromeAutocompleteProviderClient::IsPersonalizedUrlDataCollectionActive()
+@@ -372,7 +372,6 @@ void ChromeAutocompleteProviderClient::P
+ 
+ void ChromeAutocompleteProviderClient::StartServiceWorker(
+     const GURL& destination_url) {
+-  if (!SearchSuggestEnabled())
+     return;
+ 
+   if (profile_->IsOffTheRecord())
+--- a/components/omnibox/browser/base_search_provider.cc
++++ b/components/omnibox/browser/base_search_provider.cc
+@@ -394,7 +394,6 @@ bool BaseSearchProvider::CanSendURL(
+     return false;
+ 
+   // Don't run if we can't get preferences or search suggest is not enabled.
+-  if (!client->SearchSuggestEnabled())
+     return false;
+ 
+   // Only make the request if we know that the provider supports sending zero
+--- a/components/omnibox/browser/document_provider.cc
++++ b/components/omnibox/browser/document_provider.cc
+@@ -364,7 +364,6 @@ bool DocumentProvider::IsDocumentProvide
+     return false;
+ 
+   // These may seem like search suggestions, so gate on that setting too.
+-  if (!client->SearchSuggestEnabled())
+     return false;
+ 
+   // Client-side toggle must be enabled.
+--- a/components/omnibox/browser/on_device_head_provider.cc
++++ b/components/omnibox/browser/on_device_head_provider.cc
+@@ -105,7 +105,6 @@ bool OnDeviceHeadProvider::IsOnDeviceHea
+     return false;
+ 
+   // Check whether search suggest is enabled.
+-  if (!client()->SearchSuggestEnabled())
+     return false;
+ 
+   // Make sure user is not in incognito, unless on device head provider is
+--- a/components/omnibox/browser/search_provider.cc
++++ b/components/omnibox/browser/search_provider.cc
+@@ -765,7 +765,7 @@ bool SearchProvider::IsQuerySuitableForS
+   // keyword input to a keyword suggest server, if any.)
+   const TemplateURL* default_url = providers_.GetDefaultProviderURL();
+   const TemplateURL* keyword_url = providers_.GetKeywordProviderURL();
+-  return !client()->IsOffTheRecord() && client()->SearchSuggestEnabled() &&
++  return !client()->IsOffTheRecord() && false &&
+          ((default_url && !default_url->suggestions_url().empty() &&
+            !*query_is_private) ||
+           (keyword_url && !keyword_url->suggestions_url().empty()));
+--- a/components/omnibox/browser/zero_suggest_provider.cc
++++ b/components/omnibox/browser/zero_suggest_provider.cc
+@@ -166,7 +166,6 @@ constexpr char kOmniboxZeroSuggestEligib
+ bool RemoteNoUrlSuggestionsAreAllowed(
+     AutocompleteProviderClient* client,
+     const TemplateURLService* template_url_service) {
+-  if (!client->SearchSuggestEnabled())
+     return false;
+ 
+   if (!client->IsAuthenticated())
+--- a/ios/chrome/browser/autocomplete/autocomplete_provider_client_impl.mm
++++ b/ios/chrome/browser/autocomplete/autocomplete_provider_client_impl.mm
+@@ -170,7 +170,7 @@ bool AutocompleteProviderClientImpl::IsO
+ }
+ 
+ bool AutocompleteProviderClientImpl::SearchSuggestEnabled() const {
+-  return browser_state_->GetPrefs()->GetBoolean(prefs::kSearchSuggestEnabled);
++  return false;
+ }
+ 
+ bool AutocompleteProviderClientImpl::IsPersonalizedUrlDataCollectionActive()
+--- a/chrome/browser/resources/settings/privacy_page/personalization_options.html
++++ b/chrome/browser/resources/settings/privacy_page/personalization_options.html
+@@ -30,11 +30,6 @@
+         border-top: none;
+       }
+     </style>
+-    <settings-toggle-button hidden="[[!pageVisibility.searchPrediction]]"
+-        pref="{{prefs.search.suggest_enabled}}"
+-        label="$i18n{searchSuggestPref}"
+-        sub-label="$i18n{searchSuggestPrefDesc}">
+-    </settings-toggle-button>
+     <settings-toggle-button pref="{{prefs.alternate_error_pages.enabled}}"
+         label="$i18n{linkDoctorPref}"
+         sub-label="$i18n{linkDoctorPrefDesc}">
