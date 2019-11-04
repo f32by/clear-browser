@@ -38,7 +38,8 @@ debian_buster/disable/installer.patch
 ungoogled-chromium/disable-crashpad-handler-macos.patch
 custom/0001-change-default-preferences.patch
 custom/0002-disable-default-feedback-extension.patch
-custom/0003-remove-compiler-unused-warning.patch
+custom/0004-disable-usb-service.patch
+custom/0005-disable-thread-watcher.patch
 ui/0001-adjust-top-chrome-style.patch
 ui/0002-change-default-theme-color.patch
 ui/0003-custom-person-menu-macos.patch

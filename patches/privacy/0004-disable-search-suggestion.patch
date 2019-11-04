@@ -29,7 +29,7 @@
    // Only make the request if we know that the provider supports sending zero
 --- a/components/omnibox/browser/document_provider.cc
 +++ b/components/omnibox/browser/document_provider.cc
-@@ -364,7 +364,6 @@ bool DocumentProvider::IsDocumentProvide
+@@ -368,7 +368,6 @@ bool DocumentProvider::IsDocumentProvide
      return false;
  
    // These may seem like search suggestions, so gate on that setting too.
@@ -49,7 +49,7 @@
    // Make sure user is not in incognito, unless on device head provider is
 --- a/components/omnibox/browser/search_provider.cc
 +++ b/components/omnibox/browser/search_provider.cc
-@@ -765,7 +765,7 @@ bool SearchProvider::IsQuerySuitableForS
+@@ -767,7 +767,7 @@ bool SearchProvider::IsQuerySuitableForS
    // keyword input to a keyword suggest server, if any.)
    const TemplateURL* default_url = providers_.GetDefaultProviderURL();
    const TemplateURL* keyword_url = providers_.GetKeywordProviderURL();
