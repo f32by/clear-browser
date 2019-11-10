@@ -1,6 +1,6 @@
 --- a/chrome/browser/autocomplete/chrome_autocomplete_provider_client.cc
 +++ b/chrome/browser/autocomplete/chrome_autocomplete_provider_client.cc
-@@ -275,7 +275,7 @@ bool ChromeAutocompleteProviderClient::I
+@@ -276,7 +276,7 @@ bool ChromeAutocompleteProviderClient::I
  }
  
  bool ChromeAutocompleteProviderClient::SearchSuggestEnabled() const {
@@ -9,7 +9,7 @@
  }
  
  bool ChromeAutocompleteProviderClient::IsPersonalizedUrlDataCollectionActive()
-@@ -372,7 +372,6 @@ void ChromeAutocompleteProviderClient::P
+@@ -373,7 +373,6 @@ void ChromeAutocompleteProviderClient::P
  
  void ChromeAutocompleteProviderClient::StartServiceWorker(
      const GURL& destination_url) {
@@ -39,14 +39,14 @@
    // Client-side toggle must be enabled.
 --- a/components/omnibox/browser/on_device_head_provider.cc
 +++ b/components/omnibox/browser/on_device_head_provider.cc
-@@ -105,7 +105,6 @@ bool OnDeviceHeadProvider::IsOnDeviceHea
+@@ -106,7 +106,6 @@ bool OnDeviceHeadProvider::IsOnDeviceHea
      return false;
  
    // Check whether search suggest is enabled.
 -  if (!client()->SearchSuggestEnabled())
      return false;
  
-   // Make sure user is not in incognito, unless on device head provider is
+   // This flag specifies whether we should serve incognito or non incognito
 --- a/components/omnibox/browser/search_provider.cc
 +++ b/components/omnibox/browser/search_provider.cc
 @@ -767,7 +767,7 @@ bool SearchProvider::IsQuerySuitableForS

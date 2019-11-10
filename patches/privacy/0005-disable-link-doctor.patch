@@ -30,7 +30,7 @@
  void NetErrorTabHelper::StartDnsProbe() {
 --- a/chrome/browser/prefs/browser_prefs.cc
 +++ b/chrome/browser/prefs/browser_prefs.cc
-@@ -802,7 +802,6 @@ void RegisterProfilePrefs(user_prefs::Pr
+@@ -803,7 +803,6 @@ void RegisterProfilePrefs(user_prefs::Pr
    MediaEngagementService::RegisterProfilePrefs(registry);
    MediaStorageIdSalt::RegisterProfilePrefs(registry);
    MediaStreamDevicesController::RegisterProfilePrefs(registry);

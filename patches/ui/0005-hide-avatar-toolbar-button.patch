@@ -1,6 +1,6 @@
 --- a/chrome/browser/ui/views/toolbar/toolbar_view.cc
 +++ b/chrome/browser/ui/views/toolbar/toolbar_view.cc
-@@ -221,7 +221,7 @@ void ToolbarView::Init() {
+@@ -216,7 +216,7 @@ void ToolbarView::Init() {
  
    std::unique_ptr<ToolbarAccountIconContainerView>
        toolbar_account_icon_container;

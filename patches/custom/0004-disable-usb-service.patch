@@ -469,7 +469,7 @@
  #include "ui/base/l10n/l10n_util.h"
  #endif  // defined(OS_ANDROID)
  
-@@ -1260,14 +1259,6 @@ void ChromeBrowserMainParts::PostBrowser
+@@ -1262,14 +1261,6 @@ void ChromeBrowserMainParts::PostBrowser
        base::TimeDelta::FromMinutes(1));
  
  #if !defined(OS_ANDROID)
@@ -484,7 +484,7 @@
    if (base::FeatureList::IsEnabled(features::kTabMetricsLogging)) {
      // Initialize the TabActivityWatcher to begin logging tab activity events.
      resource_coordinator::TabActivityWatcher::GetInstance();
-@@ -1849,8 +1840,6 @@ void ChromeBrowserMainParts::PostMainMes
+@@ -1852,8 +1843,6 @@ void ChromeBrowserMainParts::PostMainMes
    // Disarm the startup hang detector time bomb if it is still Arm'ed.
    startup_watcher_->Disarm();
  

@@ -36,4 +36,4 @@
 +        &data_, "var securityOrigin = '';");
  
      // Load embedded translate.js.
-     data_.append(ui::ResourceBundle::GetSharedInstance().DecompressDataResource(
+     data_.append(ui::ResourceBundle::GetSharedInstance().LoadDataResourceString(

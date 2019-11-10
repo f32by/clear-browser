@@ -657,7 +657,7 @@
  #endif  // BASE_METRICS_HISTOGRAM_MACROS_LOCAL_H_
 --- a/chrome/browser/chrome_browser_main.cc
 +++ b/chrome/browser/chrome_browser_main.cc
-@@ -648,6 +648,7 @@ ChromeBrowserMainParts::~ChromeBrowserMa
+@@ -650,6 +650,7 @@ ChromeBrowserMainParts::~ChromeBrowserMa
  }
  
  void ChromeBrowserMainParts::SetupMetrics() {
@@ -665,7 +665,7 @@
    TRACE_EVENT0("startup", "ChromeBrowserMainParts::SetupMetrics");
    metrics::MetricsService* metrics = browser_process_->metrics_service();
    metrics->synthetic_trial_registry()->AddSyntheticTrialObserver(
-@@ -664,6 +665,7 @@ void ChromeBrowserMainParts::SetupMetric
+@@ -666,6 +667,7 @@ void ChromeBrowserMainParts::SetupMetric
  
  // static
  void ChromeBrowserMainParts::StartMetricsRecording() {
@@ -673,7 +673,7 @@
    TRACE_EVENT0("startup", "ChromeBrowserMainParts::StartMetricsRecording");
  
  #if defined(OS_ANDROID)
-@@ -698,6 +700,7 @@ void ChromeBrowserMainParts::StartMetric
+@@ -700,6 +702,7 @@ void ChromeBrowserMainParts::StartMetric
  }
  
  void ChromeBrowserMainParts::RecordBrowserStartupTime() {

@@ -1,6 +1,6 @@
 --- a/chrome/browser/BUILD.gn
 +++ b/chrome/browser/BUILD.gn
-@@ -1874,7 +1874,6 @@ jumbo_static_library("browser") {
+@@ -1882,7 +1882,6 @@ jumbo_static_library("browser") {
    allow_circular_includes_from = [
      "//chrome/browser/ui",
      "//chrome/browser/ui/webui/bluetooth_internals",
@@ -8,7 +8,7 @@
    ]
  
    public_deps = [
-@@ -1926,7 +1925,6 @@ jumbo_static_library("browser") {
+@@ -1934,7 +1933,6 @@ jumbo_static_library("browser") {
      "//chrome/browser/reputation:proto",
      "//chrome/browser/resource_coordinator:mojo_bindings",
      "//chrome/browser/resource_coordinator:tab_manager_features",
@@ -16,7 +16,7 @@
      "//chrome/browser/ssl:proto",
      "//chrome/browser/touch_to_fill",
      "//chrome/browser/ui",
-@@ -3015,8 +3013,6 @@ jumbo_static_library("browser") {
+@@ -3031,8 +3029,6 @@ jumbo_static_library("browser") {
        "download/download_commands.h",
        "download/download_crx_util.cc",
        "download/download_crx_util.h",
@@ -25,7 +25,7 @@
        "download/download_dir_policy_handler.cc",
        "download/download_dir_policy_handler.h",
        "download/download_dir_util.cc",
-@@ -5388,10 +5384,8 @@ grit("resources") {
+@@ -5406,10 +5402,8 @@ grit("resources") {
      }
    }
  
@@ -189,7 +189,7 @@
        <include name="IDR_DOWNLOAD_INTERNALS_JS" file="resources\download_internals\download_internals.js" type="BINDATA" compress="gzip" />
 --- a/chrome/browser/browsing_data/chrome_browsing_data_remover_delegate.cc
 +++ b/chrome/browser/browsing_data/chrome_browsing_data_remover_delegate.cc
-@@ -256,17 +256,6 @@ bool DoesOriginMatchEmbedderMask(int ori
+@@ -257,17 +257,6 @@ bool DoesOriginMatchEmbedderMask(int ori
    return false;
  }
  
@@ -207,7 +207,7 @@
  }  // namespace
  
  ChromeBrowsingDataRemoverDelegate::ChromeBrowsingDataRemoverDelegate(
-@@ -662,36 +651,6 @@ void ChromeBrowsingDataRemoverDelegate::
+@@ -663,36 +652,6 @@ void ChromeBrowsingDataRemoverDelegate::
          ContentSettingsType::CLIENT_HINTS, base::Time(), base::Time::Max(),
          website_settings_filter);
  
@@ -296,7 +296,7 @@
          command_line->AppendSwitch(
              switches::kDisableClientSidePhishingDetection);
        }
-@@ -3910,7 +3883,7 @@ ChromeContentBrowserClient::CreateThrott
+@@ -3925,7 +3898,7 @@ ChromeContentBrowserClient::CreateThrott
  
    throttles.push_back(std::make_unique<SSLErrorNavigationThrottle>(
        handle,
@@ -305,7 +305,7 @@
        base::Bind(&SSLErrorHandler::HandleSSLError),
        base::Bind(&IsInHostedApp)));
  
-@@ -3932,12 +3905,6 @@ ChromeContentBrowserClient::CreateThrott
+@@ -3947,12 +3920,6 @@ ChromeContentBrowserClient::CreateThrott
        GooglePasswordManagerNavigationThrottle::MaybeCreateThrottleFor(handle));
  #endif
  
@@ -318,7 +318,7 @@
  #if defined(OS_WIN) || defined(OS_MACOSX) || \
      (defined(OS_LINUX) && !defined(OS_CHROMEOS))
    MaybeAddThrottle(&throttles,
-@@ -4894,19 +4861,7 @@ ChromeContentBrowserClient::GetSafeBrows
+@@ -4909,19 +4876,7 @@ ChromeContentBrowserClient::GetSafeBrows
      content::ResourceContext* resource_context) {
    DCHECK_CURRENTLY_ON(BrowserThread::IO);
  
@@ -391,7 +391,7 @@
  
  namespace {
  
-@@ -312,13 +306,6 @@ ChromeDownloadManagerDelegate::~ChromeDo
+@@ -324,13 +318,6 @@ ChromeDownloadManagerDelegate::~ChromeDo
  
  void ChromeDownloadManagerDelegate::SetDownloadManager(DownloadManager* dm) {
    download_manager_ = dm;
@@ -405,7 +405,7 @@
  }
  
  #if defined(OS_ANDROID)
-@@ -628,16 +615,6 @@ void ChromeDownloadManagerDelegate::Choo
+@@ -640,16 +627,6 @@ void ChromeDownloadManagerDelegate::Choo
  
  void ChromeDownloadManagerDelegate::SanitizeSavePackageResourceName(
      base::FilePath* filename) {
@@ -422,7 +422,7 @@
  }
  
  void ChromeDownloadManagerDelegate::OpenDownloadUsingPlatformHandler(
-@@ -761,20 +738,6 @@ ChromeDownloadManagerDelegate::Applicati
+@@ -773,20 +750,6 @@ ChromeDownloadManagerDelegate::Applicati
    return std::string(chrome::kApplicationClientIDStringForAVScanning);
  }
  
@@ -586,7 +586,7 @@
      "api/safe_browsing_private/safe_browsing_util.cc",
      "api/safe_browsing_private/safe_browsing_util.h",
      "api/sessions/session_id.cc",
-@@ -747,9 +743,6 @@ jumbo_static_library("extensions") {
+@@ -751,9 +747,6 @@ jumbo_static_library("extensions") {
  
      # TODO(loyso): Remove this circular dependency. http://crbug.com/876576.
      "//chrome/browser/web_applications/extensions",
@@ -596,7 +596,7 @@
    ]
  
    # Since browser and browser_extensions actually depend on each other,
-@@ -761,9 +754,6 @@ jumbo_static_library("extensions") {
+@@ -765,9 +758,6 @@ jumbo_static_library("extensions") {
      "//chrome/browser/extensions/api:api_registration",
      "//chrome/common",
      "//chrome/common/extensions/api",
@@ -606,7 +606,7 @@
      "//components/signin/core/browser",
      "//content/public/browser",
      "//mojo/public/cpp/bindings",
-@@ -785,11 +775,9 @@ jumbo_static_library("extensions") {
+@@ -789,11 +779,9 @@ jumbo_static_library("extensions") {
      "//chrome/browser/media/router",
      "//chrome/browser/media/router/discovery",
      "//chrome/browser/resource_coordinator:mojo_bindings",
@@ -618,7 +618,7 @@
      "//chrome/services/removable_storage_writer/public/mojom",
      "//components/app_modal",
      "//components/autofill/content/browser",
-@@ -832,10 +820,6 @@ jumbo_static_library("extensions") {
+@@ -836,10 +824,6 @@ jumbo_static_library("extensions") {
      "//components/rappor",
      "//components/resources",
      "//components/safe_browsing:buildflags",
@@ -1230,7 +1230,7 @@
  
 --- a/chrome/browser/prefs/browser_prefs.cc
 +++ b/chrome/browser/prefs/browser_prefs.cc
-@@ -68,7 +68,6 @@
+@@ -69,7 +69,6 @@
  #include "chrome/browser/ssl/ssl_config_service_manager.h"
  #include "chrome/browser/task_manager/task_manager_interface.h"
  #include "chrome/browser/tracing/chrome_tracing_delegate.h"
@@ -1238,7 +1238,7 @@
  #include "chrome/browser/ui/browser_ui_prefs.h"
  #include "chrome/browser/ui/hats/hats_service.h"
  #include "chrome/browser/ui/navigation_correction_tab_observer.h"
-@@ -829,7 +828,6 @@ void RegisterProfilePrefs(user_prefs::Pr
+@@ -830,7 +829,6 @@ void RegisterProfilePrefs(user_prefs::Pr
    PushMessagingAppIdentifier::RegisterProfilePrefs(registry);
    RegisterBrowserUserPrefs(registry);
    safe_browsing::RegisterProfilePrefs(registry);
@@ -1248,14 +1248,14 @@
    sync_sessions::SessionSyncPrefs::RegisterProfilePrefs(registry);
 --- a/chrome/browser/profiles/chrome_browser_main_extra_parts_profiles.cc
 +++ b/chrome/browser/profiles/chrome_browser_main_extra_parts_profiles.cc
-@@ -253,7 +253,6 @@ void ChromeBrowserMainExtraPartsProfiles
+@@ -229,7 +229,6 @@ void ChromeBrowserMainExtraPartsProfiles
  #if BUILDFLAG(ENABLE_CAPTIVE_PORTAL_DETECTION)
    CaptivePortalServiceFactory::GetInstance();
  #endif
 -  CertificateReportingServiceFactory::GetInstance();
    ChromeBrowsingDataRemoverDelegateFactory::GetInstance();
- #if defined(OS_CHROMEOS)
-   chromeos::android_sms::AndroidSmsServiceFactory::GetInstance();
+   ChromeSigninClientFactory::GetInstance();
+   ClientHintsFactory::GetInstance();
 --- a/chrome/browser/profiles/profile.cc
 +++ b/chrome/browser/profiles/profile.cc
 @@ -22,7 +22,6 @@
@@ -1276,7 +1276,7 @@
  #include "chrome/browser/sharing/sharing_service_factory.h"
  #include "chrome/browser/signin/identity_manager_factory.h"
  #include "chrome/browser/signin/signin_ui_util.h"
-@@ -626,17 +625,6 @@ void ProfileImpl::LoadPrefsForNormalStar
+@@ -594,17 +593,6 @@ void ProfileImpl::LoadPrefsForNormalStar
  
    mojo::PendingRemote<prefs::mojom::TrackedPreferenceValidationDelegate>
        pref_validation_delegate;
@@ -1314,8 +1314,8 @@
  jumbo_static_library("safe_browsing") {
 +  if(false) {
    sources = [
-     "safe_browsing_controller_client.cc",
-     "safe_browsing_controller_client.h",
+     "chrome_controller_client.cc",
+     "chrome_controller_client.h",
 @@ -62,6 +63,7 @@ jumbo_static_library("safe_browsing") {
      ]
      deps += [ "//extensions/browser" ]
@@ -1362,7 +1362,7 @@
      StartExtractDmgFeatures();
 --- a/chrome/browser/ssl/captive_portal_blocking_page.cc
 +++ b/chrome/browser/ssl/captive_portal_blocking_page.cc
-@@ -211,9 +211,6 @@ void CaptivePortalBlockingPage::Populate
+@@ -209,9 +209,6 @@ void CaptivePortalBlockingPage::Populate
    load_time_data->SetString("recurrentErrorParagraph", "");
    load_time_data->SetBoolean("show_recurrent_error_paragraph", false);
  
@@ -1372,7 +1372,7 @@
      load_time_data->SetBoolean(security_interstitials::kDisplayCheckBox, false);
  }
  
-@@ -229,8 +226,6 @@ void CaptivePortalBlockingPage::CommandR
+@@ -227,8 +224,6 @@ void CaptivePortalBlockingPage::CommandR
    security_interstitials::SecurityInterstitialCommand cmd =
        static_cast<security_interstitials::SecurityInterstitialCommand>(
            command_num);
@@ -1511,7 +1511,7 @@
  void ChromeSubresourceFilterClient::OnReloadRequested() {
 --- a/chrome/browser/ui/BUILD.gn
 +++ b/chrome/browser/ui/BUILD.gn
-@@ -340,15 +340,9 @@ jumbo_static_library("ui") {
+@@ -343,15 +343,9 @@ jumbo_static_library("ui") {
      }
    }
  
@@ -1528,7 +1528,7 @@
    defines = []
    libs = []
  
-@@ -394,7 +388,6 @@ jumbo_static_library("ui") {
+@@ -398,7 +392,6 @@ jumbo_static_library("ui") {
      "//chrome/browser/profiling_host",
      "//chrome/browser/resources/omnibox:resources",
      "//chrome/browser/resources/usb_internals:resources",
@@ -1536,7 +1536,7 @@
      "//chrome/browser/ssl:proto",
      "//chrome/browser/ui/webui/bluetooth_internals",
      "//chrome/browser/ui/webui/downloads:mojo_bindings",
-@@ -473,17 +466,6 @@ jumbo_static_library("ui") {
+@@ -477,17 +470,6 @@ jumbo_static_library("ui") {
      "//components/rappor",
      "//components/renderer_context_menu",
      "//components/resources",
@@ -1554,7 +1554,7 @@
      "//components/search",
      "//components/search_engines",
      "//components/security_interstitials/content:security_interstitial_page",
-@@ -1364,7 +1346,6 @@ jumbo_static_library("ui") {
+@@ -1375,7 +1357,6 @@ jumbo_static_library("ui") {
        "//chrome/browser/profile_resetter:profile_reset_report_proto",
        "//chrome/browser/resource_coordinator:tab_metrics_event_proto",
        "//chrome/browser/resource_coordinator/tab_ranker",
@@ -1562,7 +1562,7 @@
        "//chrome/browser/ui/webui/app_management:mojo_bindings",
        "//chrome/common:buildflags",
        "//chrome/common:search_mojom",
-@@ -2711,7 +2692,6 @@ jumbo_static_library("ui") {
+@@ -2727,7 +2708,6 @@ jumbo_static_library("ui") {
        "views/device_chooser_content_view.h",
        "views/devtools_process_observer.cc",
        "views/devtools_process_observer.h",
@@ -1570,7 +1570,7 @@
        "views/download/download_in_progress_dialog_view.cc",
        "views/download/download_in_progress_dialog_view.h",
        "views/download/download_item_view.cc",
-@@ -3990,15 +3970,6 @@ jumbo_static_library("ui") {
+@@ -4007,15 +3987,6 @@ jumbo_static_library("ui") {
      }
    }
  
@@ -1675,7 +1675,7 @@
  #include "components/search/search.h"
  #include "components/security_state/content/content_utils.h"
  #include "components/security_state/core/security_state.h"
-@@ -1330,10 +1329,6 @@ void Browser::OnDidBlockNavigation(conte
+@@ -1339,10 +1338,6 @@ void Browser::OnDidBlockNavigation(conte
        framebust_helper->AddBlockedUrl(blocked_url, base::BindOnce(on_click));
      }
    }
@@ -1811,7 +1811,7 @@
      if (should_open_while_scanning_ &&
          model_->GetState() == DownloadItem::COMPLETE) {
        should_open_while_scanning_ = false;
-@@ -628,18 +618,6 @@ void DownloadItemView::ButtonPressed(vie
+@@ -627,18 +617,6 @@ void DownloadItemView::ButtonPressed(vie
      return;
    }
  
@@ -1830,7 +1830,7 @@
    if (sender == dropdown_button_) {
      // TODO(estade): this is copied from ToolbarActionView but should be shared
      // one way or another.
-@@ -1016,14 +994,6 @@ void DownloadItemView::ShowWarningDialog
+@@ -1015,14 +993,6 @@ void DownloadItemView::ShowWarningDialog
  gfx::ImageSkia DownloadItemView::GetWarningIcon() {
    switch (model_->GetDangerType()) {
      case download::DOWNLOAD_DANGER_TYPE_UNCOMMON_CONTENT:
@@ -1845,7 +1845,7 @@
        FALLTHROUGH;
  
      case download::DOWNLOAD_DANGER_TYPE_DANGEROUS_URL:
-@@ -1058,35 +1028,6 @@ gfx::ImageSkia DownloadItemView::GetWarn
+@@ -1057,35 +1027,6 @@ gfx::ImageSkia DownloadItemView::GetWarn
  }
  
  void DownloadItemView::ShowDeepScanningDialog() {
@@ -1881,7 +1881,7 @@
  }
  
  void DownloadItemView::ClearDeepScanningDialog() {
-@@ -1381,6 +1322,5 @@ base::string16 DownloadItemView::ElidedF
+@@ -1380,6 +1321,5 @@ base::string16 DownloadItemView::ElidedF
  }
  
  void DownloadItemView::OpenDownloadDuringAsyncScanning() {
@@ -2051,7 +2051,7 @@
    source->AddLocalizedString("dangerSettingsDesc",
 --- a/chrome/browser/ui/webui/interstitials/interstitial_ui.cc
 +++ b/chrome/browser/ui/webui/interstitials/interstitial_ui.cc
-@@ -277,117 +277,6 @@ LookalikeUrlInterstitialPage* CreateLook
+@@ -270,117 +270,6 @@ LookalikeUrlInterstitialPage* CreateLook
                                                       safe_url));
  }
  
@@ -2169,7 +2169,7 @@
  #if BUILDFLAG(ENABLE_CAPTIVE_PORTAL_DETECTION)
  CaptivePortalBlockingPage* CreateCaptivePortalBlockingPage(
      content::WebContents* web_contents) {
-@@ -497,8 +386,6 @@ void InterstitialHTMLSource::StartDataRe
+@@ -489,8 +378,6 @@ void InterstitialHTMLSource::StartDataRe
      interstitial_delegate.reset(CreateSSLBlockingPage(web_contents));
    } else if (path_without_query == "/mitm-software-ssl") {
      interstitial_delegate.reset(CreateMITMSoftwareBlockingPage(web_contents));
@@ -2178,7 +2178,7 @@
    } else if (path_without_query == "/clock") {
      interstitial_delegate.reset(CreateBadClockBlockingPage(web_contents));
    } else if (path_without_query == "/lookalike") {
-@@ -512,11 +399,7 @@ void InterstitialHTMLSource::StartDataRe
+@@ -504,11 +391,7 @@ void InterstitialHTMLSource::StartDataRe
          CreateOriginPolicyInterstitialPage(web_contents));
    }
  
