@@ -1,6 +1,6 @@
 --- a/chrome/browser/extensions/component_loader.cc
 +++ b/chrome/browser/extensions/component_loader.cc
-@@ -523,13 +523,6 @@ void ComponentLoader::AddDefaultComponen
+@@ -526,13 +526,6 @@ void ComponentLoader::AddDefaultComponen
      AddHangoutServicesExtension();
  #endif  // BUILDFLAG(ENABLE_HANGOUT_SERVICES_EXTENSION)
  

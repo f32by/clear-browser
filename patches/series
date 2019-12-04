@@ -39,14 +39,12 @@ ungoogled-chromium/disable-crashpad-handler-macos.patch
 custom/0001-change-default-preferences.patch
 custom/0002-disable-default-feedback-extension.patch
 custom/0004-disable-usb-service.patch
-custom/0005-disable-thread-watcher.patch
 ui/0001-adjust-top-chrome-style.patch
 ui/0002-change-default-theme-color.patch
-ui/0003-custom-person-menu-macos.patch
 ui/0004-remove-extension-icon-badge.patch
-ui/0005-hide-avatar-toolbar-button.patch
 privacy/0001-remove-safebrowsing.patch
 privacy/0002-remove-metric-histogram-logging.patch
 privacy/0003-disable-anoymized-data-collection.patch
 privacy/0004-disable-search-suggestion.patch
 privacy/0005-disable-link-doctor.patch
+privacy/0006-disable-rappor-uploading.patch

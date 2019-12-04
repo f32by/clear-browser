@@ -29,7 +29,7 @@
    // Only make the request if we know that the provider supports sending zero
 --- a/components/omnibox/browser/document_provider.cc
 +++ b/components/omnibox/browser/document_provider.cc
-@@ -368,7 +368,6 @@ bool DocumentProvider::IsDocumentProvide
+@@ -373,7 +373,6 @@ bool DocumentProvider::IsDocumentProvide
      return false;
  
    // These may seem like search suggestions, so gate on that setting too.
@@ -39,7 +39,7 @@
    // Client-side toggle must be enabled.
 --- a/components/omnibox/browser/on_device_head_provider.cc
 +++ b/components/omnibox/browser/on_device_head_provider.cc
-@@ -106,7 +106,6 @@ bool OnDeviceHeadProvider::IsOnDeviceHea
+@@ -115,7 +115,6 @@ bool OnDeviceHeadProvider::IsOnDeviceHea
      return false;
  
    // Check whether search suggest is enabled.
@@ -81,7 +81,7 @@
  bool AutocompleteProviderClientImpl::IsPersonalizedUrlDataCollectionActive()
 --- a/chrome/browser/resources/settings/privacy_page/personalization_options.html
 +++ b/chrome/browser/resources/settings/privacy_page/personalization_options.html
-@@ -30,11 +30,6 @@
+@@ -32,11 +32,6 @@
          border-top: none;
        }
      </style>
@@ -93,3 +93,17 @@
      <settings-toggle-button pref="{{prefs.alternate_error_pages.enabled}}"
          label="$i18n{linkDoctorPref}"
          sub-label="$i18n{linkDoctorPrefDesc}">
+diff --git a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc b/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
+index 28216bdcddfe..984bcf50fb1a 100644
+--- a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
++++ b/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
+@@ -222,8 +222,7 @@ FileManagerPrivateGetPreferencesFunction::Run() {
+                          !drive_integration_service->mount_failed();
+   result.cellular_disabled =
+       service->GetBoolean(drive::prefs::kDisableDriveOverCellular);
+-  result.search_suggest_enabled =
+-      service->GetBoolean(prefs::kSearchSuggestEnabled);
++  result.search_suggest_enabled = false;
+   result.use24hour_clock = service->GetBoolean(prefs::kUse24HourClock);
+   result.timezone =
+       base::UTF16ToUTF8(chromeos::system::TimezoneSettings::GetInstance()

@@ -6,7 +6,7 @@ symbol_level = 0
 blink_symbol_level = 0
 safe_browsing_mode = 0
 enable_iterator_debugging = false
-treat_warnings_as_errors = true
+treat_warnings_as_errors = false
 fieldtrial_testing_like_official_build = true
 
 exclude_unwind_tables = true

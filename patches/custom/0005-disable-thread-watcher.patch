@@ -1,6 +1,6 @@
 --- a/chrome/browser/BUILD.gn
 +++ b/chrome/browser/BUILD.gn
-@@ -833,12 +833,6 @@ jumbo_static_library("browser") {
+@@ -831,12 +831,6 @@ jumbo_static_library("browser") {
      "metrics/tab_footprint_aggregator.h",
      "metrics/testing/metrics_reporting_pref_helper.cc",
      "metrics/testing/metrics_reporting_pref_helper.h",
@@ -133,7 +133,7 @@
  #include "ui/base/resource/resource_bundle_android.h"
  #else
  #include "chrome/browser/resource_coordinator/tab_activity_watcher.h"
-@@ -643,10 +641,6 @@ ChromeBrowserMainParts::ChromeBrowserMai
+@@ -644,10 +642,6 @@ ChromeBrowserMainParts::ChromeBrowserMai
    if (parameters.ui_task)
      browser_defaults::enable_help_app = false;
  
@@ -144,7 +144,7 @@
  }
  
  ChromeBrowserMainParts::~ChromeBrowserMainParts() {
-@@ -1293,12 +1287,6 @@ int ChromeBrowserMainParts::PreMainMessa
+@@ -1294,12 +1288,6 @@ int ChromeBrowserMainParts::PreMainMessa
    // Now that the file thread has been started, start metrics.
    StartMetricsRecording();
  
@@ -157,7 +157,7 @@
    // Do any initializating in the browser process that requires all threads
    // running.
    browser_process_->PreMainMessageLoopRun();
-@@ -1640,14 +1628,6 @@ int ChromeBrowserMainParts::PreMainMessa
+@@ -1648,14 +1636,6 @@ int ChromeBrowserMainParts::PreMainMessa
    language_usage_metrics::LanguageUsageMetrics::RecordApplicationLanguage(
        browser_process_->GetApplicationLocale());
  
@@ -172,7 +172,7 @@
  // On mobile, need for clean shutdown arises only when the application comes
  // to foreground (i.e. MetricsService::OnAppEnterForeground is called).
  // http://crbug.com/179143
-@@ -1666,9 +1646,6 @@ int ChromeBrowserMainParts::PreMainMessa
+@@ -1674,9 +1654,6 @@ int ChromeBrowserMainParts::PreMainMessa
    CloudPrintProxyServiceFactory::GetForProfile(profile_);
  #endif
  
@@ -182,7 +182,7 @@
    // This has to come before the first GetInstance() call. PreBrowserStart()
    // seems like a reasonable place to put this, except on Android,
    // OfflinePageInfoHandler::Register() below calls GetInstance().
-@@ -1676,10 +1653,6 @@ int ChromeBrowserMainParts::PreMainMessa
+@@ -1684,10 +1661,6 @@ int ChromeBrowserMainParts::PreMainMessa
    sessions::ContentSerializedNavigationDriver::SetInstance(
        ChromeSerializedNavigationDriver::GetInstance());
  
@@ -193,7 +193,7 @@
  #if BUILDFLAG(ENABLE_OFFLINE_PAGES)
    offline_pages::OfflinePageInfoHandler::Register();
  #endif
-@@ -1836,12 +1809,6 @@ void ChromeBrowserMainParts::PostMainMes
+@@ -1844,12 +1817,6 @@ void ChromeBrowserMainParts::PostMainMes
    // Android specific MessageLoop
    NOTREACHED();
  #else
@@ -206,7 +206,7 @@
  
    for (size_t i = 0; i < chrome_extra_parts_.size(); ++i)
      chrome_extra_parts_[i]->PostMainMessageLoopRun();
-@@ -1854,9 +1821,6 @@ void ChromeBrowserMainParts::PostMainMes
+@@ -1862,9 +1829,6 @@ void ChromeBrowserMainParts::PostMainMes
    if (notify_result_ == ProcessSingleton::PROCESS_NONE)
      process_singleton_->Cleanup();
  

@@ -11,7 +11,7 @@
  void UnifiedConsentService::Shutdown() {
 --- a/chrome/browser/resources/settings/privacy_page/personalization_options.html
 +++ b/chrome/browser/resources/settings/privacy_page/personalization_options.html
-@@ -39,11 +39,6 @@
+@@ -41,11 +41,6 @@
          label="$i18n{linkDoctorPref}"
          sub-label="$i18n{linkDoctorPrefDesc}">
      </settings-toggle-button>

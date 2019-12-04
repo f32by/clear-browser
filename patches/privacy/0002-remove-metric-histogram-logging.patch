@@ -118,7 +118,7 @@
  }  // namespace base
 --- a/base/metrics/histogram_macros.h
 +++ b/base/metrics/histogram_macros.h
-@@ -78,29 +78,19 @@
+@@ -75,29 +75,19 @@
  // example). For scoped enums, this is awkward since it requires casting the
  // enum to an arithmetic type and adding one. Instead, prefer the two argument
  // version of the macro which automatically deduces the boundary from kMaxValue.
@@ -151,7 +151,7 @@
  
  //------------------------------------------------------------------------------
  // Linear histograms.
-@@ -114,16 +104,13 @@
+@@ -111,16 +101,13 @@
  
  // Sample usage:
  //   UMA_HISTOGRAM_EXACT_LINEAR("Histogram.Linear", count, 10);
@@ -170,7 +170,7 @@
  
  //------------------------------------------------------------------------------
  // Scaled linear histograms.
-@@ -136,10 +123,7 @@
+@@ -133,10 +120,7 @@
  // It'll be necessary to #include "base/lazy_instance.h" to use this macro.
  
  #define UMA_HISTOGRAM_SCALED_EXACT_LINEAR(name, sample, count, value_max, \
@@ -182,7 +182,7 @@
  
  //------------------------------------------------------------------------------
  // Count histograms. These are used for collecting numeric data. Note that we
-@@ -188,10 +172,7 @@
+@@ -185,10 +169,7 @@
  
  // Sample usage:
  //   UMA_HISTOGRAM_CUSTOM_COUNTS("My.Histogram", sample, 1, 100000000, 50);
@@ -194,7 +194,7 @@
  
  //------------------------------------------------------------------------------
  // Timing histograms. These are used for collecting timing data (generally
-@@ -207,25 +188,17 @@
+@@ -204,25 +185,17 @@
  
  // Short timings - up to 10 seconds. For high-resolution (microseconds) timings,
  // see UMA_HISTOGRAM_CUSTOM_MICROSECONDS_TIMES.
@@ -224,7 +224,7 @@
  
  // This can be used when the default ranges are not sufficient. This macro lets
  // the metric developer customize the min and max of the sampled range, as well
-@@ -234,12 +207,7 @@
+@@ -231,12 +204,7 @@
  // Sample usage:
  //   UMA_HISTOGRAM_CUSTOM_TIMES("Very.Long.Timing.Histogram", time_delta,
  //       base::TimeDelta::FromSeconds(1), base::TimeDelta::FromDays(1), 100);
@@ -238,7 +238,7 @@
  
  // Same as UMA_HISTOGRAM_CUSTOM_TIMES but reports |sample| in microseconds,
  // dropping the report if this client doesn't have a high-resolution clock.
-@@ -254,12 +222,7 @@
+@@ -251,12 +219,7 @@
  //      base::TimeDelta::FromMicroseconds(1),
  //      base::TimeDelta::FromMilliseconds(10), 100);
  #define UMA_HISTOGRAM_CUSTOM_MICROSECONDS_TIMES(name, sample, min, max, \
@@ -252,7 +252,7 @@
  
  // Scoped class which logs its time on this earth in milliseconds as a UMA
  // statistic. This is recommended for when you want a histogram which measures
-@@ -271,14 +234,12 @@
+@@ -268,14 +231,12 @@
  //     SCOPED_UMA_HISTOGRAM_TIMER("Component.FunctionTime");
  //     ...
  //   }
@@ -269,7 +269,7 @@
  
  
  //------------------------------------------------------------------------------
-@@ -294,12 +255,10 @@
+@@ -291,12 +252,10 @@
  
  // Used to measure common KB-granularity memory stats. Range is up to 500000KB -
  // approximately 500M.
@@ -284,7 +284,7 @@
  
  
  //------------------------------------------------------------------------------
-@@ -312,38 +271,18 @@
+@@ -309,39 +268,18 @@
  
  // For details on usage, see the documentation on the non-stability equivalents.
  
@@ -305,10 +305,11 @@
 -        name, sample, min, max, bucket_count,                                  \
 -        base::HistogramBase::kUmaStabilityHistogramFlag)
 -
--#define UMA_STABILITY_HISTOGRAM_ENUMERATION(name, sample, enum_max)            \
--    INTERNAL_HISTOGRAM_ENUMERATION_WITH_FLAG(                                  \
--        name, sample, enum_max,                                                \
--        base::HistogramBase::kUmaStabilityHistogramFlag)
+-#define UMA_STABILITY_HISTOGRAM_ENUMERATION(name, ...)                  \
+-  INTERNAL_UMA_HISTOGRAM_ENUMERATION_GET_MACRO(                         \
+-      __VA_ARGS__, INTERNAL_UMA_HISTOGRAM_ENUMERATION_SPECIFY_BOUNDARY, \
+-      INTERNAL_UMA_HISTOGRAM_ENUMERATION_DEDUCE_BOUNDARY)               \
+-  (name, __VA_ARGS__, base::HistogramBase::kUmaStabilityHistogramFlag)
 -
 -#define UMA_STABILITY_HISTOGRAM_LONG_TIMES(name, sample) \
 -  STATIC_HISTOGRAM_POINTER_BLOCK(                        \
@@ -324,7 +325,7 @@
 -      base::HistogramBase::kUmaStabilityHistogramFlag)
 +                                              bucket_count)
 +
-+#define UMA_STABILITY_HISTOGRAM_ENUMERATION(name, sample, enum_max)
++#define UMA_STABILITY_HISTOGRAM_ENUMERATION(name, ...)
 +
 +#define UMA_STABILITY_HISTOGRAM_LONG_TIMES(name, sample)
 +
@@ -332,7 +333,7 @@
  
  //------------------------------------------------------------------------------
  // Histogram instantiation helpers.
-@@ -368,27 +307,17 @@
+@@ -366,27 +304,17 @@
  #define STATIC_HISTOGRAM_POINTER_GROUP(constant_histogram_name, index,        \
                                         constant_maximum,                      \
                                         histogram_add_method_invocation,       \
@@ -363,7 +364,7 @@
  
  // For an enum with customized range. In general, sparse histograms should be
  // used instead.
-@@ -397,9 +326,6 @@
+@@ -395,9 +323,6 @@
  // requirement of |custom_ranges|. You can use the helper function
  // CustomHistogram::ArrayToCustomEnumRanges to transform a C-style array of
  // valid sample values to a std::vector<int>.
@@ -657,7 +658,7 @@
  #endif  // BASE_METRICS_HISTOGRAM_MACROS_LOCAL_H_
 --- a/chrome/browser/chrome_browser_main.cc
 +++ b/chrome/browser/chrome_browser_main.cc
-@@ -650,6 +650,7 @@ ChromeBrowserMainParts::~ChromeBrowserMa
+@@ -669,6 +669,7 @@ ChromeBrowserMainParts::~ChromeBrowserMa
  }
  
  void ChromeBrowserMainParts::SetupMetrics() {
@@ -665,7 +666,7 @@
    TRACE_EVENT0("startup", "ChromeBrowserMainParts::SetupMetrics");
    metrics::MetricsService* metrics = browser_process_->metrics_service();
    metrics->synthetic_trial_registry()->AddSyntheticTrialObserver(
-@@ -666,6 +667,7 @@ void ChromeBrowserMainParts::SetupMetric
+@@ -685,6 +686,7 @@ void ChromeBrowserMainParts::SetupMetric
  
  // static
  void ChromeBrowserMainParts::StartMetricsRecording() {
@@ -673,7 +674,7 @@
    TRACE_EVENT0("startup", "ChromeBrowserMainParts::StartMetricsRecording");
  
  #if defined(OS_ANDROID)
-@@ -700,6 +702,7 @@ void ChromeBrowserMainParts::StartMetric
+@@ -719,6 +721,7 @@ void ChromeBrowserMainParts::StartMetric
  }
  
  void ChromeBrowserMainParts::RecordBrowserStartupTime() {
@@ -715,7 +716,7 @@
        std::make_unique<UpgradeMetricsProvider>());
 --- a/chrome/browser/browser_process_impl.cc
 +++ b/chrome/browser/browser_process_impl.cc
-@@ -895,7 +895,7 @@ void BrowserProcessImpl::RegisterPrefs(P
+@@ -906,7 +906,7 @@ void BrowserProcessImpl::RegisterPrefs(P
  #endif  // defined(OS_CHROMEOS)
  
    registry->RegisterBooleanPref(metrics::prefs::kMetricsReportingEnabled,
@@ -846,7 +847,7 @@
  LinearHistogram::LinearHistogram(const char* name,
 --- a/chrome/browser/resources/settings/privacy_page/personalization_options.html
 +++ b/chrome/browser/resources/settings/privacy_page/personalization_options.html
-@@ -39,27 +39,6 @@
+@@ -41,27 +41,6 @@
          label="$i18n{linkDoctorPref}"
          sub-label="$i18n{linkDoctorPrefDesc}">
      </settings-toggle-button>
