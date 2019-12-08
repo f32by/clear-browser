@@ -88,6 +88,7 @@ def check_prerequisites():
     print('Checking prerequisites...')
 
     if PLATFORM == 'Linux':
+        # check git
         pass
     elif PLATFORM == 'Darwin':
         # check Xcode

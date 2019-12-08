@@ -42,7 +42,7 @@ custom/0004-disable-usb-service.patch
 ui/0001-adjust-top-chrome-style.patch
 ui/0002-change-default-theme-color.patch
 ui/0004-remove-extension-icon-badge.patch
-privacy/0001-remove-safebrowsing.patch
+privacy/0001-remove-safebrowsing-partial.patch
 privacy/0002-remove-metric-histogram-logging.patch
 privacy/0003-disable-anoymized-data-collection.patch
 privacy/0004-disable-search-suggestion.patch

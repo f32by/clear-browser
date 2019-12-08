@@ -845,33 +845,3 @@
  }
  
  LinearHistogram::LinearHistogram(const char* name,
---- a/chrome/browser/resources/settings/privacy_page/personalization_options.html
-+++ b/chrome/browser/resources/settings/privacy_page/personalization_options.html
-@@ -41,27 +41,6 @@
-         label="$i18n{linkDoctorPref}"
-         sub-label="$i18n{linkDoctorPrefDesc}">
-     </settings-toggle-button>
--<if expr="_google_chrome">
--<if expr="chromeos">
--    <settings-toggle-button pref="{{prefs.cros.metrics.reportingEnabled}}"
--        label="$i18n{enableLogging}"
--        sub-label="$i18n{enableLoggingDesc}">
--    </settings-toggle-button>
--</if><!-- chromeos -->
--<if expr="not chromeos">
--    <settings-toggle-button id="metricsReportingControl"
--        pref="[[metricsReportingPref_]]" label="$i18n{enableLogging}"
--        sub-label="$i18n{enableLoggingDesc}" no-set-pref
--        on-settings-boolean-control-change="onMetricsReportingChange_">
--      <template is="dom-if" if="[[showRestart_]]" restamp>
--        <cr-button on-click="onRestartTap_" id="restart"
--            slot="more-actions">
--          $i18n{restart}
--        </cr-button>
--      </template>
--    </settings-toggle-button>
--</if><!-- not chromeos -->
--</if><!-- _google_chrome -->
-     <settings-toggle-button
-         pref="{{prefs.url_keyed_anonymized_data_collection.enabled}}"
-         label="$i18n{urlKeyedAnonymizedDataCollection}"

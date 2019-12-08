@@ -9,17 +9,3 @@
  }
  
  void UnifiedConsentService::Shutdown() {
---- a/chrome/browser/resources/settings/privacy_page/personalization_options.html
-+++ b/chrome/browser/resources/settings/privacy_page/personalization_options.html
-@@ -41,11 +41,6 @@
-         label="$i18n{linkDoctorPref}"
-         sub-label="$i18n{linkDoctorPrefDesc}">
-     </settings-toggle-button>
--    <settings-toggle-button
--        pref="{{prefs.url_keyed_anonymized_data_collection.enabled}}"
--        label="$i18n{urlKeyedAnonymizedDataCollection}"
--        sub-label="$i18n{urlKeyedAnonymizedDataCollectionDesc}">
--    </settings-toggle-button>
- <if expr="_google_chrome">
-     <settings-toggle-button id="spellCheckControl"
-         pref="{{prefs.spellcheck.use_spelling_service}}"

@@ -79,20 +79,6 @@
  }
  
  bool AutocompleteProviderClientImpl::IsPersonalizedUrlDataCollectionActive()
---- a/chrome/browser/resources/settings/privacy_page/personalization_options.html
-+++ b/chrome/browser/resources/settings/privacy_page/personalization_options.html
-@@ -32,11 +32,6 @@
-         border-top: none;
-       }
-     </style>
--    <settings-toggle-button hidden="[[!pageVisibility.searchPrediction]]"
--        pref="{{prefs.search.suggest_enabled}}"
--        label="$i18n{searchSuggestPref}"
--        sub-label="$i18n{searchSuggestPrefDesc}">
--    </settings-toggle-button>
-     <settings-toggle-button pref="{{prefs.alternate_error_pages.enabled}}"
-         label="$i18n{linkDoctorPref}"
-         sub-label="$i18n{linkDoctorPrefDesc}">
 diff --git a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc b/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
 index 28216bdcddfe..984bcf50fb1a 100644
 --- a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
