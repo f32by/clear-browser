@@ -2,7 +2,7 @@
 
 --- a/components/translate/core/browser/translate_manager.cc
 +++ b/components/translate/core/browser/translate_manager.cc
-@@ -684,8 +684,7 @@ void TranslateManager::FilterIsTranslate
+@@ -692,8 +692,7 @@ void TranslateManager::FilterIsTranslate
          TranslateBrowserMetrics::INITIATION_STATUS_NO_NETWORK);
    }
  

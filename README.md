@@ -1,7 +1,7 @@
 # clear-browser
 A custom chromium build inspired by ungoogled-chromium but keep some Google services working.
 
-Current version: `80.0.3983.2`.
+Current version: `80.0.3987.7`.
 
 Usually keep updated with latest **Dev** version.
 

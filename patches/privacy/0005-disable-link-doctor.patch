@@ -30,7 +30,7 @@
  void NetErrorTabHelper::StartDnsProbe() {
 --- a/chrome/browser/prefs/browser_prefs.cc
 +++ b/chrome/browser/prefs/browser_prefs.cc
-@@ -805,7 +805,6 @@ void RegisterProfilePrefs(user_prefs::Pr
+@@ -811,7 +811,6 @@ void RegisterProfilePrefs(user_prefs::Pr
    MediaEngagementService::RegisterProfilePrefs(registry);
    MediaStorageIdSalt::RegisterProfilePrefs(registry);
    MediaStreamDevicesController::RegisterProfilePrefs(registry);
@@ -40,7 +40,7 @@
    ntp_snippets::RemoteSuggestionsProviderImpl::RegisterProfilePrefs(registry);
 --- a/chrome/browser/ui/tab_helpers.cc
 +++ b/chrome/browser/ui/tab_helpers.cc
-@@ -238,7 +238,6 @@ void TabHelpers::AttachTabHelpers(WebCon
+@@ -237,7 +237,6 @@ void TabHelpers::AttachTabHelpers(WebCon
        web_contents);
    MixedContentSettingsTabHelper::CreateForWebContents(web_contents);
    NativeFileSystemPermissionRequestManager::CreateForWebContents(web_contents);

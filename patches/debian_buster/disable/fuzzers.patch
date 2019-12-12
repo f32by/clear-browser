@@ -3,7 +3,7 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/BUILD.gn
 +++ b/BUILD.gn
-@@ -748,8 +748,7 @@ group("gn_all") {
+@@ -747,8 +747,7 @@ group("gn_all") {
      }
    }
  
@@ -15,7 +15,7 @@ author: Michael Gilbert <mgilbert@debian.org>
        "//testing/libfuzzer/fuzzers",
 --- a/content/test/BUILD.gn
 +++ b/content/test/BUILD.gn
-@@ -2302,12 +2302,6 @@ test("content_perftests") {
+@@ -2303,12 +2303,6 @@ test("content_perftests") {
    }
  }
  

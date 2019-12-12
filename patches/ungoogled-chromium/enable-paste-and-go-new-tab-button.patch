@@ -13,7 +13,7 @@
        AddChildView(std::make_unique<views::InkDropContainerView>());
 --- a/chrome/browser/ui/views/tabs/tab_strip.cc
 +++ b/chrome/browser/ui/views/tabs/tab_strip.cc
-@@ -3197,15 +3197,12 @@ void TabStrip::ButtonPressed(views::Butt
+@@ -3188,15 +3188,12 @@ void TabStrip::ButtonPressed(views::Butt
  
        const ui::MouseEvent& mouse = static_cast<const ui::MouseEvent&>(event);
        if (mouse.IsOnlyMiddleMouseButton()) {

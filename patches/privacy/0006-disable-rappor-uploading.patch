@@ -1,8 +1,6 @@
-diff --git a/components/rappor/rappor_service_impl.cc b/components/rappor/rappor_service_impl.cc
-index 976e0376276b..36ae308310a9 100644
 --- a/components/rappor/rappor_service_impl.cc
 +++ b/components/rappor/rappor_service_impl.cc
-@@ -32,7 +32,7 @@ const char kMimeType[] = "application/vnd.chrome.rappor";
+@@ -32,7 +32,7 @@ const char kMimeType[] = "application/vn
  const char kRapporDailyEventHistogram[] = "Rappor.DailyEvent.IntervalType";
  
  // The rappor server's URL.

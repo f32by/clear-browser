@@ -1,8 +1,6 @@
-diff --git a/third_party/blink/renderer/core/dom/document.cc b/third_party/blink/renderer/core/dom/document.cc
-index 511aac290866..c4bc2b14710e 100644
 --- a/third_party/blink/renderer/core/dom/document.cc
 +++ b/third_party/blink/renderer/core/dom/document.cc
-@@ -1202,6 +1202,10 @@ Document::Document(const DocumentInit& initializer,
+@@ -1277,6 +1277,10 @@ Document::Document(const DocumentInit& i
    liveDocumentSet().insert(this);
  #endif
  
@@ -13,7 +11,7 @@ index 511aac290866..c4bc2b14710e 100644
    if (frame_ && frame_->GetPage()->GetAgentMetricsCollector())
      frame_->GetPage()->GetAgentMetricsCollector()->DidAttachDocument(*this);
  }
-@@ -1216,6 +1220,14 @@ Document::~Document() {
+@@ -1291,6 +1295,14 @@ Document::~Document() {
    InstanceCounters::DecrementCounter(InstanceCounters::kDocumentCounter);
  }
  
@@ -28,11 +26,9 @@ index 511aac290866..c4bc2b14710e 100644
  Range* Document::CreateRangeAdjustedToTreeScope(const TreeScope& tree_scope,
                                                  const Position& position) {
    DCHECK(position.IsNotNull());
-diff --git a/third_party/blink/renderer/core/dom/document.h b/third_party/blink/renderer/core/dom/document.h
-index d84d6f602e4b..e4c23adc59e0 100644
 --- a/third_party/blink/renderer/core/dom/document.h
 +++ b/third_party/blink/renderer/core/dom/document.h
-@@ -413,6 +413,10 @@ class CORE_EXPORT Document : public ContainerNode,
+@@ -414,6 +414,10 @@ class CORE_EXPORT Document : public Cont
      has_xml_declaration_ = has_xml_declaration ? 1 : 0;
    }
  
@@ -43,7 +39,7 @@ index d84d6f602e4b..e4c23adc59e0 100644
    String visibilityState() const;
    bool IsPageVisible() const;
    bool hidden() const;
-@@ -1942,6 +1946,9 @@ class CORE_EXPORT Document : public ContainerNode,
+@@ -1958,6 +1962,9 @@ class CORE_EXPORT Document : public Cont
  
    base::ElapsedTimer start_time_;
  
@@ -53,11 +49,9 @@ index d84d6f602e4b..e4c23adc59e0 100644
    Member<ScriptRunner> script_runner_;
  
    HeapVector<Member<ScriptElementBase>> current_script_stack_;
-diff --git a/third_party/blink/renderer/core/dom/element.cc b/third_party/blink/renderer/core/dom/element.cc
-index 04b1223db2ee..be06a0af47c5 100644
 --- a/third_party/blink/renderer/core/dom/element.cc
 +++ b/third_party/blink/renderer/core/dom/element.cc
-@@ -1868,6 +1868,12 @@ DOMRectList* Element::getClientRects() {
+@@ -1902,6 +1902,12 @@ DOMRectList* Element::getClientRects() {
    DCHECK(element_layout_object);
    GetDocument().AdjustFloatQuadsForScrollAndAbsoluteZoom(
        quads, *element_layout_object);
@@ -70,7 +64,7 @@ index 04b1223db2ee..be06a0af47c5 100644
    return DOMRectList::Create(quads);
  }
  
-@@ -1885,6 +1891,10 @@ DOMRect* Element::getBoundingClientRect() {
+@@ -1919,6 +1925,10 @@ DOMRect* Element::getBoundingClientRect(
    DCHECK(element_layout_object);
    GetDocument().AdjustFloatRectForScrollAndAbsoluteZoom(result,
                                                          *element_layout_object);
@@ -81,11 +75,9 @@ index 04b1223db2ee..be06a0af47c5 100644
    return DOMRect::FromFloatRect(result);
  }
  
-diff --git a/third_party/blink/renderer/core/dom/range.cc b/third_party/blink/renderer/core/dom/range.cc
-index 44c86ad38933..ffc7765542bc 100644
 --- a/third_party/blink/renderer/core/dom/range.cc
 +++ b/third_party/blink/renderer/core/dom/range.cc
-@@ -1631,11 +1631,19 @@ DOMRectList* Range::getClientRects() const {
+@@ -1631,11 +1631,19 @@ DOMRectList* Range::getClientRects() con
    Vector<FloatQuad> quads;
    GetBorderAndTextQuads(quads);
  
@@ -106,11 +98,9 @@ index 44c86ad38933..ffc7765542bc 100644
  }
  
  // TODO(editing-dev): We should make
-diff --git a/third_party/blink/renderer/platform/BUILD.gn b/third_party/blink/renderer/platform/BUILD.gn
-index 495b789a66e9..df04aca7766d 100644
 --- a/third_party/blink/renderer/platform/BUILD.gn
 +++ b/third_party/blink/renderer/platform/BUILD.gn
-@@ -1457,7 +1457,10 @@ jumbo_component("platform") {
+@@ -1478,7 +1478,10 @@ jumbo_component("platform") {
      "//third_party/blink/renderer:non_test_config",
    ]
  
@@ -122,8 +112,6 @@ index 495b789a66e9..df04aca7766d 100644
  
    public_deps = [
      ":blink_platform_public_deps",
-diff --git a/third_party/blink/renderer/platform/graphics/image_data_buffer.cc b/third_party/blink/renderer/platform/graphics/image_data_buffer.cc
-index 8e1255ce43b4..5ccde24b344a 100644
 --- a/third_party/blink/renderer/platform/graphics/image_data_buffer.cc
 +++ b/third_party/blink/renderer/platform/graphics/image_data_buffer.cc
 @@ -34,6 +34,8 @@
@@ -132,10 +120,10 @@ index 8e1255ce43b4..5ccde24b344a 100644
  
 +#include "base/logging.h"
 +#include "base/rand_util.h"
+ #include "base/compiler_specific.h"
  #include "base/memory/ptr_util.h"
  #include "third_party/blink/renderer/platform/graphics/static_bitmap_image.h"
- #include "third_party/blink/renderer/platform/image-encoders/image_encoder.h"
-@@ -127,6 +129,10 @@ bool ImageDataBuffer::EncodeImageInternal(const ImageEncodingMimeType mime_type,
+@@ -130,6 +132,10 @@ bool ImageDataBuffer::EncodeImageInterna
                                            const SkPixmap& pixmap) const {
    DCHECK(is_valid_);
  
@@ -146,8 +134,6 @@ index 8e1255ce43b4..5ccde24b344a 100644
    if (mime_type == kMimeTypeJpeg) {
      SkJpegEncoder::Options options;
      options.fQuality = ImageEncoder::ComputeJpegQuality(quality);
-diff --git a/third_party/blink/renderer/platform/graphics/static_bitmap_image.cc b/third_party/blink/renderer/platform/graphics/static_bitmap_image.cc
-index 0959f2f74389..6ea57f8b3ab3 100644
 --- a/third_party/blink/renderer/platform/graphics/static_bitmap_image.cc
 +++ b/third_party/blink/renderer/platform/graphics/static_bitmap_image.cc
 @@ -4,6 +4,8 @@
@@ -173,7 +159,7 @@ index 0959f2f74389..6ea57f8b3ab3 100644
  #include "v8/include/v8.h"
  
  namespace blink {
-@@ -129,6 +133,9 @@ bool StaticBitmapImage::CopyToByteArray(
+@@ -117,6 +121,9 @@ bool StaticBitmapImage::CopyToByteArray(
    DCHECK(read_pixels_successful ||
           !sk_image->bounds().intersect(SkIRect::MakeXYWH(
               rect.X(), rect.Y(), info.width(), info.height())));
@@ -183,7 +169,7 @@ index 0959f2f74389..6ea57f8b3ab3 100644
    return true;
  }
  
-@@ -137,4 +144,157 @@ const gpu::SyncToken& StaticBitmapImage::GetSyncToken() const {
+@@ -125,4 +132,157 @@ const gpu::SyncToken& StaticBitmapImage:
    return sync_token;
  }
  
@@ -341,11 +327,9 @@ index 0959f2f74389..6ea57f8b3ab3 100644
 +
 +
  }  // namespace blink
-diff --git a/third_party/blink/renderer/platform/graphics/static_bitmap_image.h b/third_party/blink/renderer/platform/graphics/static_bitmap_image.h
-index ad7f59c79af8..365011dfdb35 100644
 --- a/third_party/blink/renderer/platform/graphics/static_bitmap_image.h
 +++ b/third_party/blink/renderer/platform/graphics/static_bitmap_image.h
-@@ -37,6 +37,11 @@ class PLATFORM_EXPORT StaticBitmapImage : public Image {
+@@ -30,6 +30,11 @@ class PLATFORM_EXPORT StaticBitmapImage 
    static scoped_refptr<StaticBitmapImage> Create(sk_sp<SkData> data,
                                                   const SkImageInfo&);
  

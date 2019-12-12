@@ -3,10 +3,9 @@ inox-patchset/0007-disable-web-resource-service.patch
 inox-patchset/0009-disable-google-ipv6-probes.patch
 inox-patchset/0014-disable-translation-lang-fetch.patch
 inox-patchset/0015-disable-update-pings.patch
-inox-patchset/0017-disable-new-avatar-menu.patch
 inox-patchset/0021-disable-rlz.patch
 debian_buster/disable/perfetto.patch
-ungoogled-chromium/disable-google-host-detection.patch
+ungoogled-chromium/disable-crash-reporter.patch
 ungoogled-chromium/disable-translate.patch
 ungoogled-chromium/disable-untraceable-urls.patch
 ungoogled-chromium/disable-domain-reliability.patch
@@ -16,6 +15,7 @@ ungoogled-chromium/disable-mei-preload.patch
 bromite/disable-fetching-field-trials.patch
 inox-patchset/0016-chromium-sandbox-pie-linux.patch
 inox-patchset/0019-disable-battery-status-service.patch
+debian_buster/disable/disable-safebrowsing-unrar.patch
 debian_buster/gn/parallel.patch
 debian_buster/fixes/ps-print.patch
 debian_buster/fixes/connection-message.patch
@@ -48,3 +48,4 @@ privacy/0003-disable-anoymized-data-collection.patch
 privacy/0004-disable-search-suggestion.patch
 privacy/0005-disable-link-doctor.patch
 privacy/0006-disable-rappor-uploading.patch
+privacy/0007-prevent-canvas-document-fingerprint

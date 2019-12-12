@@ -658,7 +658,7 @@
  #endif  // BASE_METRICS_HISTOGRAM_MACROS_LOCAL_H_
 --- a/chrome/browser/chrome_browser_main.cc
 +++ b/chrome/browser/chrome_browser_main.cc
-@@ -669,6 +669,7 @@ ChromeBrowserMainParts::~ChromeBrowserMa
+@@ -668,6 +668,7 @@ ChromeBrowserMainParts::~ChromeBrowserMa
  }
  
  void ChromeBrowserMainParts::SetupMetrics() {
@@ -666,7 +666,7 @@
    TRACE_EVENT0("startup", "ChromeBrowserMainParts::SetupMetrics");
    metrics::MetricsService* metrics = browser_process_->metrics_service();
    metrics->synthetic_trial_registry()->AddSyntheticTrialObserver(
-@@ -685,6 +686,7 @@ void ChromeBrowserMainParts::SetupMetric
+@@ -684,6 +685,7 @@ void ChromeBrowserMainParts::SetupMetric
  
  // static
  void ChromeBrowserMainParts::StartMetricsRecording() {
@@ -674,7 +674,7 @@
    TRACE_EVENT0("startup", "ChromeBrowserMainParts::StartMetricsRecording");
  
  #if defined(OS_ANDROID)
-@@ -719,6 +721,7 @@ void ChromeBrowserMainParts::StartMetric
+@@ -718,6 +720,7 @@ void ChromeBrowserMainParts::StartMetric
  }
  
  void ChromeBrowserMainParts::RecordBrowserStartupTime() {
@@ -716,7 +716,7 @@
        std::make_unique<UpgradeMetricsProvider>());
 --- a/chrome/browser/browser_process_impl.cc
 +++ b/chrome/browser/browser_process_impl.cc
-@@ -906,7 +906,7 @@ void BrowserProcessImpl::RegisterPrefs(P
+@@ -910,7 +910,7 @@ void BrowserProcessImpl::RegisterPrefs(P
  #endif  // defined(OS_CHROMEOS)
  
    registry->RegisterBooleanPref(metrics::prefs::kMetricsReportingEnabled,
