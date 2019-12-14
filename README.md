@@ -28,7 +28,7 @@ If you want to use Chrome Sync, you have to setup Google API key first. Please f
 
 # Build from sources
 
-Tested on macOS 10.15. Building on Windows is WIP.
+Tested on macOS 10.15.
 
 ## macOS
 
@@ -48,7 +48,7 @@ _IT IS BUGGY_ and WIP.
 
 ## Ubuntu
 
-Planned to test on Ubuntu 19.10 but I'm too lazy to do so.
+still WIP.
 
 # Known Issues
 
